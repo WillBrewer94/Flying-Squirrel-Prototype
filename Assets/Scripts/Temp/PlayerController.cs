@@ -7,6 +7,9 @@ public class PlayerController : MonoBehaviour {
 	public float rotate = 150f; //how much the player rotates
 	public float speed = 10f; //how fast the character moves forward
 	public float jump = 10f;
+    public float glide = 3f; //how fast the character glides forward
+    public bool djump = false; //if the character has jumped in the air
+    public float jumpdel = 0; //Measures if the character has jumped recently for gliding
 
 	public LayerMask groundLayers; //what stuff the player can jump on
 
@@ -27,10 +30,33 @@ public class PlayerController : MonoBehaviour {
 		transform.Rotate(0, x, 0);
 		transform.Translate(0, 0, z);
 
+        //Reset double jump while on the ground
+        if (isGrounded())
+        {
+            djump = false;
+        }
+
+        //Increment down the counter to see if the player is trying to glide
+        if (jumpdel > 0)
+        {
+            jumpdel--;
+        }
+
 		//Jumping
-		if (isGrounded() && Input.GetKeyDown (KeyCode.Space)) {
-			rb.AddForce (Vector3.up * jump, ForceMode.Impulse);
+		if ((isGrounded() || !djump) && Input.GetKeyDown (KeyCode.Space)) {
+            if (!isGrounded())
+            {
+                djump = true;
+            }
+            rb.AddForce (Vector3.up * jump, ForceMode.Impulse);
+            jumpdel = 10;
 		}
+
+        //Glide if the space bar is held down
+        if (!isGrounded() && Input.GetKey(KeyCode.Space) && jumpdel == 0)
+        {
+            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y * .8f, rb.velocity.z);
+        }
 	}
 
 	public bool isGrounded() {
