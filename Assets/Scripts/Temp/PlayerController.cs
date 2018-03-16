@@ -10,15 +10,28 @@ public class PlayerController : MonoBehaviour {
     public float glide = 3f; //how fast the character glides forward
     public bool djump = false; //if the character has jumped in the air
     public float jumpdel = 0; //Measures if the character has jumped recently for gliding
+    public State state;
 
 	public LayerMask groundLayers; //what stuff the player can jump on
 
 	private Rigidbody rb;
 	private BoxCollider collider;
+    private Animator anim;
+
+    //state machine
+    public enum State
+    {
+        idle,
+        walk,
+        glide,
+        jump
+    }
 
 	void Awake() {
 		rb = GetComponent<Rigidbody> ();
 		collider = GetComponent<BoxCollider> ();
+        anim = GetComponent<Animator>();
+        state = State.idle;
 	}
 
 	
@@ -29,7 +42,13 @@ public class PlayerController : MonoBehaviour {
 
 		transform.Rotate(0, x, 0);
 		transform.Translate(0, 0, z);
-
+         if (z != 0 && isGrounded())
+        {
+            anim.SetBool("isMoving", true);
+        } else
+        {
+            anim.SetBool("isMoving", false);
+        }
         //Reset double jump while on the ground
         if (isGrounded())
         {
@@ -44,18 +63,28 @@ public class PlayerController : MonoBehaviour {
 
 		//Jumping
 		if ((isGrounded() || !djump) && Input.GetKeyDown (KeyCode.Space)) {
+            state = State.jump;
+            anim.SetBool("isJumping", true);
             if (!isGrounded())
             {
                 djump = true;
             }
             rb.AddForce (Vector3.up * jump, ForceMode.Impulse);
-            jumpdel = 10;
-		}
+            jumpdel = 100;
+		} else
+        {
+            anim.SetBool("isJumping", false);
+        }
 
         //Glide if the space bar is held down
         if (!isGrounded() && Input.GetKey(KeyCode.Space) && jumpdel == 0)
         {
-            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y * .8f, rb.velocity.z);
+            state = State.glide;
+            anim.SetBool("isGliding", true);
+            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y * .95f, rb.velocity.z);
+        } else
+        {
+            anim.SetBool("isGliding", false);
         }
 	}
 
