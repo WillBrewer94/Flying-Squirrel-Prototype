@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour {
 	private Rigidbody rb;
 	private BoxCollider collider;
     private Animator anim;
+    
 
     //state machine
     public enum State

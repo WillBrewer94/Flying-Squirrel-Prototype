@@ -5,10 +5,12 @@ using UnityEngine;
 public class PlayerCollect : MonoBehaviour {
 
     public int collectCount;
+    private AudioSource audio;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         collectCount = 0;
+        audio = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -20,5 +22,6 @@ public class PlayerCollect : MonoBehaviour {
     public void collectObject()
     {
         collectCount++;
+        audio.Play();
     }
 }
