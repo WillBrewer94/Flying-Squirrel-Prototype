@@ -65,12 +65,18 @@ public class PlayerController : MonoBehaviour {
 		if ((isGrounded() || !djump) && Input.GetKeyDown (KeyCode.Space)) {
             state = State.jump;
             anim.SetBool("isJumping", true);
+            // double jump
             if (!isGrounded())
             {
                 djump = true;
+                rb.AddForce(Vector3.up * jump / 2, ForceMode.Impulse);
+            } else
+            // first jump
+            {
+                rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
             }
-            rb.AddForce (Vector3.up * jump, ForceMode.Impulse);
-            jumpdel = 100;
+
+            jumpdel = 25;
 		} else
         {
             anim.SetBool("isJumping", false);
