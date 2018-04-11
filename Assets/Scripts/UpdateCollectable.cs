@@ -14,6 +14,11 @@ public class UpdateCollectable : MonoBehaviour {
 		
 	}
 
+    void FixedUpdate()
+    {
+        transform.Rotate(0, 1, 0);
+    }
+
     void OnTriggerEnter(Collider c)
     {
         
