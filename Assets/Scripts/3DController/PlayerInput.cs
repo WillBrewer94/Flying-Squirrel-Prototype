@@ -31,6 +31,10 @@ public class PlayerInput : MonoBehaviour {
             player.OnGlideInputDown();
         }
 
+        if(playerActions.Glide.WasReleased) {
+            player.OnGlideInputUp();
+        }
+
         if (playerActions.Jump.WasReleased) {
             player.OnJumpInputUp();
         }
