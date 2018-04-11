@@ -1,0 +1,157 @@
+fileFormatVersion: 2
+guid: 18939212ad354474a86b76f06ea90dc3
+timeCreated: 1488721017
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Floating_Island_01
+    100002: Floating_Island_02
+    100004: Floating_Island_03
+    100006: Floating_Island_04
+    100008: Floating_Island_05
+    100010: Floating_Island_05_Water
+    100012: Floating_Island_06
+    100014: Floating_Island_07
+    100016: Floating_Island_08
+    100018: Floating_Island_09
+    100020: Floating_Island_10
+    100022: Floating_Island_11
+    100024: Floating_Island_12
+    100026: Floating_Island_12_Water
+    100028: Floating_Island_13
+    100030: Floating_Island_13_Water
+    100032: //RootNode
+    400000: Floating_Island_01
+    400002: Floating_Island_02
+    400004: Floating_Island_03
+    400006: Floating_Island_04
+    400008: Floating_Island_05
+    400010: Floating_Island_05_Water
+    400012: Floating_Island_06
+    400014: Floating_Island_07
+    400016: Floating_Island_08
+    400018: Floating_Island_09
+    400020: Floating_Island_10
+    400022: Floating_Island_11
+    400024: Floating_Island_12
+    400026: Floating_Island_12_Water
+    400028: Floating_Island_13
+    400030: Floating_Island_13_Water
+    400032: //RootNode
+    2300000: Floating_Island_01
+    2300002: Floating_Island_02
+    2300004: Floating_Island_03
+    2300006: Floating_Island_04
+    2300008: Floating_Island_05
+    2300010: Floating_Island_05_Water
+    2300012: Floating_Island_06
+    2300014: Floating_Island_07
+    2300016: Floating_Island_08
+    2300018: Floating_Island_09
+    2300020: Floating_Island_10
+    2300022: Floating_Island_11
+    2300024: Floating_Island_12
+    2300026: Floating_Island_12_Water
+    2300028: Floating_Island_13
+    2300030: Floating_Island_13_Water
+    3300000: Floating_Island_01
+    3300002: Floating_Island_02
+    3300004: Floating_Island_03
+    3300006: Floating_Island_04
+    3300008: Floating_Island_05
+    3300010: Floating_Island_05_Water
+    3300012: Floating_Island_06
+    3300014: Floating_Island_07
+    3300016: Floating_Island_08
+    3300018: Floating_Island_09
+    3300020: Floating_Island_10
+    3300022: Floating_Island_11
+    3300024: Floating_Island_12
+    3300026: Floating_Island_12_Water
+    3300028: Floating_Island_13
+    3300030: Floating_Island_13_Water
+    4300000: Floating_Island_13
+    4300002: Floating_Island_13_Water
+    4300004: Floating_Island_12
+    4300006: Floating_Island_12_Water
+    4300008: Floating_Island_11
+    4300010: Floating_Island_10
+    4300012: Floating_Island_09
+    4300014: Floating_Island_08
+    4300016: Floating_Island_07
+    4300018: Floating_Island_06
+    4300020: Floating_Island_05
+    4300022: Floating_Island_05_Water
+    4300024: Floating_Island_04
+    4300026: Floating_Island_03
+    4300028: Floating_Island_02
+    4300030: Floating_Island_01
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 14
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 0
+    normalImportMode: 1
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
