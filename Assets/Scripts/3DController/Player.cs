@@ -29,14 +29,27 @@ public class Player : MonoBehaviour {
 
     Controller3D controller;
     Vector2 directionalInput;
+    public State state;
+    private Animator anim;
 
-	// Use this for initialization
-	void Start () {
+    //state machine
+    public enum State {
+        idle,
+        walk,
+        glide,
+        jump
+    }
+
+    // Use this for initialization
+    void Start () {
         controller = GetComponent<Controller3D>();
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
         distToGround = GetComponent<CapsuleCollider>().bounds.extents.z;
+
+        anim = GetComponent<Animator>();
+        state = State.idle;
     }
 	
 	// Update is called once per frame
@@ -48,6 +61,7 @@ public class Player : MonoBehaviour {
 
         if (isGrounded) {
             velocity.y = 0;
+            anim.SetBool("isJumping", false);
         }
 
         yaw += speedH * Input.GetAxis("Mouse X");
@@ -63,9 +77,14 @@ public class Player : MonoBehaviour {
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (isGrounded) ? accelerationTimeGrounded : accelerationTimeAirborne);
         velocity.z = Mathf.SmoothDamp(velocity.z, targetVelocityZ, ref velocityZSmoothing, (isGrounded) ? accelerationTimeGrounded : accelerationTimeAirborne);
 
-        
         velocity.y += gravity * Time.deltaTime;
         
+        //set animation stuff
+        if(Mathf.Abs(velocity.x) > 2.0f || Mathf.Abs(velocity.z) > 2.0f) {
+            anim.SetBool("isMoving", true);
+        } else {
+            anim.SetBool("isMoving", false);
+        }
     }
 
     public void SetDirectionalInput(Vector2 input) {
@@ -81,13 +100,20 @@ public class Player : MonoBehaviour {
     //========================
     public void OnJumpInputDown() {
         if(isGrounded) {
+            state = State.jump;
+            anim.SetBool("isJumping", true);
             velocity.y = maxJumpVelocity;
         } 
     }
 
     public void OnGlideInputDown() {
         velocity.y = -gravity;
-        
+        state = State.glide;
+        anim.SetBool("isGliding", true);
+    }
+
+    public void OnGlideInputUp() {
+        anim.SetBool("isGliding", false);
     }
 
     public void OnJumpInputUp() {
