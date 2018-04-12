@@ -18,8 +18,8 @@ public class PlayerInput : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
+
 	void Update () {
-        
         player.SetDirectionalInput(playerActions.Move);
 
         // Jump Input
@@ -27,19 +27,17 @@ public class PlayerInput : MonoBehaviour {
             player.OnJumpInputDown();
         }
 
-        if(playerActions.Glide.IsPressed) {
-            player.OnGlideInputDown();
+        if(playerActions.Jump.IsPressed) {
+            player.OnJumpInputHold();
         }
-
-        if(playerActions.Glide.WasReleased) {
-            player.OnGlideInputUp();
-        }
-
+        
         if (playerActions.Jump.WasReleased) {
             player.OnJumpInputUp();
         }
+    }
 
-       
+    public void PlayerInputs() {
+
     }
 
     PlayerActions CreateWithDefaultBindings() {
