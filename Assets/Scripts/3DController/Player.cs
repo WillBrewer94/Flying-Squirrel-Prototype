@@ -15,11 +15,14 @@ public class Player : MonoBehaviour {
     public float pitch = 5;
     public float speedH = 10;
     public float speedV = 10;
+    public int maxJumps = 5;
+    int jumps = 0;
 
     //Calculated values
     public Vector3 velocity;
     public Vector3 prevVelocity;
     float gravity;
+    float curGravity;
     float maxJumpVelocity;
     float minJumpVelocity;
     float velocityXSmoothing;
@@ -29,8 +32,6 @@ public class Player : MonoBehaviour {
 
     Controller3D controller;
     Vector2 directionalInput;
-    public State state;
-    private Animator anim;
 
     //state machine
     public enum State {
@@ -47,21 +48,19 @@ public class Player : MonoBehaviour {
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
         distToGround = GetComponent<CapsuleCollider>().bounds.extents.z;
-
-        anim = GetComponent<Animator>();
-        state = State.idle;
     }
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+        //cache previous velocity
         prevVelocity = velocity;
         CalculateVelocity();
         controller.Move(velocity * Time.deltaTime, directionalInput);
-        isGrounded = IsGrounded();
 
+        isGrounded = IsGrounded();
         if (isGrounded) {
             velocity.y = 0;
-            anim.SetBool("isJumping", false);
+            jumps = 0;
         }
 
         yaw += speedH * Input.GetAxis("Mouse X");
@@ -77,13 +76,9 @@ public class Player : MonoBehaviour {
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (isGrounded) ? accelerationTimeGrounded : accelerationTimeAirborne);
         velocity.z = Mathf.SmoothDamp(velocity.z, targetVelocityZ, ref velocityZSmoothing, (isGrounded) ? accelerationTimeGrounded : accelerationTimeAirborne);
 
-        velocity.y += gravity * Time.deltaTime;
-        
-        //set animation stuff
-        if(Mathf.Abs(velocity.x) > 2.0f || Mathf.Abs(velocity.z) > 2.0f) {
-            anim.SetBool("isMoving", true);
-        } else {
-            anim.SetBool("isMoving", false);
+        //Ensure velocity doesn't get crazy high
+        if(velocity.y > -50.0f) {
+            velocity.y += gravity * Time.deltaTime;
         }
     }
 
@@ -92,33 +87,29 @@ public class Player : MonoBehaviour {
     }
 
     public bool IsGrounded() {
-        return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.01f);
+        return Physics.Raycast(transform.position, -Vector3.up, distToGround);
     }
 
     //========================
     //      Inputs
     //========================
     public void OnJumpInputDown() {
-        if(isGrounded) {
-            state = State.jump;
-            anim.SetBool("isJumping", true);
+        if(isGrounded || jumps < maxJumps) {
             velocity.y = maxJumpVelocity;
+            jumps++;
         } 
     }
 
-    public void OnGlideInputDown() {
-        velocity.y = -gravity;
-        state = State.glide;
-        anim.SetBool("isGliding", true);
-    }
-
-    public void OnGlideInputUp() {
-        anim.SetBool("isGliding", false);
+    public void OnJumpInputHold() {
+        //Check if velocity is decreasing (moving down)
+        if(velocity.y < 0.0f) {
+            velocity.y = 0;
+        }
     }
 
     public void OnJumpInputUp() {
         if(velocity.y > minJumpVelocity) {
-            velocity.y = minJumpVelocity;
+            //velocity.y = minJumpVelocity;
         }
     }
 
