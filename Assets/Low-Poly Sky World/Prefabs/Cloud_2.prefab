@@ -274,6 +274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd640c929deb7b42b0bfeab61e7f79a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bounce: 42
 --- !u!198 &198225900015091548
 ParticleSystem:
   m_ObjectHideFlags: 1

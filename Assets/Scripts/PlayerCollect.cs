@@ -12,16 +12,12 @@ public class PlayerCollect : MonoBehaviour {
         collectCount = 0;
         audio = GetComponent<AudioSource>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     // call when the player collides with a collectable, will increase collectCount
     public void collectObject()
     {
         collectCount++;
+		GemsManager.gems++;
         audio.Play();
     }
 }

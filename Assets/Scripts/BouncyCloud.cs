@@ -4,24 +4,16 @@ using UnityEngine;
 
 public class BouncyCloud : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	public float bounce = 50;
 
     void OnTriggerEnter(Collider other)
     {
         Debug.Log("up");
-        other.transform.GetComponent<Rigidbody>().AddForce(0, 50, 0);
+        other.transform.GetComponent<Rigidbody>().AddForce(0, bounce, 0);
     }
 
     void OnTriggerStay(Collider other)
     {
-		other.transform.GetComponent<Rigidbody>().AddForce(0, 50, 0);
+		other.transform.GetComponent<Rigidbody>().AddForce(0, bounce, 0);
     }
 }
