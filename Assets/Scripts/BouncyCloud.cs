@@ -17,11 +17,11 @@ public class BouncyCloud : MonoBehaviour {
     void OnTriggerEnter(Collider other)
     {
         Debug.Log("up");
-        other.transform.GetComponent<Rigidbody>().AddForce(0, 1000, 0);
+        other.transform.GetComponent<Rigidbody>().AddForce(0, 50, 0);
     }
 
     void OnTriggerStay(Collider other)
     {
-        other.transform.GetComponent<Rigidbody>().AddForce(0, 10, 0);
+		other.transform.GetComponent<Rigidbody>().AddForce(0, 50, 0);
     }
 }
