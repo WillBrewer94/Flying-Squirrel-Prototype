@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent (typeof (Controller3D))]
+[RequireComponent(typeof(Controller3D))]
 public class Player : MonoBehaviour {
     //Movement Values
     public float maxJumpHeight;
@@ -42,16 +42,16 @@ public class Player : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
+    void Start() {
         controller = GetComponent<Controller3D>();
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
         distToGround = GetComponent<CapsuleCollider>().bounds.extents.z;
     }
-	
-	// Update is called once per frame
-	void FixedUpdate () {
+
+    // Update is called once per frame
+    void FixedUpdate() {
         //cache previous velocity
         prevVelocity = velocity;
         CalculateVelocity();
@@ -77,7 +77,7 @@ public class Player : MonoBehaviour {
         velocity.z = Mathf.SmoothDamp(velocity.z, targetVelocityZ, ref velocityZSmoothing, (isGrounded) ? accelerationTimeGrounded : accelerationTimeAirborne);
 
         //Ensure velocity doesn't get crazy high
-        if(velocity.y > -50.0f) {
+        if (velocity.y > -50.0f) {
             velocity.y += gravity * Time.deltaTime;
         }
     }
@@ -94,21 +94,21 @@ public class Player : MonoBehaviour {
     //      Inputs
     //========================
     public void OnJumpInputDown() {
-        if(isGrounded || jumps < maxJumps) {
+        if (isGrounded || jumps < maxJumps) {
             velocity.y = maxJumpVelocity;
             jumps++;
-        } 
+        }
     }
 
     public void OnJumpInputHold() {
         //Check if velocity is decreasing (moving down)
-        if(velocity.y < 0.0f) {
+        if (velocity.y < 0.0f) {
             velocity.y = 0;
         }
     }
 
     public void OnJumpInputUp() {
-        if(velocity.y > minJumpVelocity) {
+        if (velocity.y > minJumpVelocity) {
             //velocity.y = minJumpVelocity;
         }
     }
@@ -118,5 +118,9 @@ public class Player : MonoBehaviour {
     //========================
     public Vector3 GetVelocity() {
         return velocity;
+    }
+
+    public void SetVelocity(Vector3 v) {
+        velocity = v;
     }
 }
