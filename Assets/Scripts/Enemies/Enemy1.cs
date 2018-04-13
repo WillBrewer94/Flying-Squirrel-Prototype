@@ -11,6 +11,11 @@ public class Enemy1 : MonoBehaviour
     public int currWaypoint;
     public UnityEngine.AI.NavMeshAgent navy;
     public GameObject player;
+    private Rigidbody rb;
+    private CapsuleCollider collider;
+    public float jump = 2f;
+
+    public LayerMask groundLayers;
 
     //State Machine
     public enum AIState
@@ -24,6 +29,8 @@ public class Enemy1 : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
+        collider = GetComponent<CapsuleCollider>();
         aiState = AIState.Patrol;
         currWaypoint = -2;
         setNextWaypoint();
@@ -32,7 +39,8 @@ public class Enemy1 : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+        //State Machine
         switch (aiState)
         {
             case AIState.Patrol:
@@ -42,7 +50,7 @@ public class Enemy1 : MonoBehaviour
                 }
                 Vector3 target = player.GetComponent<Transform>().position;
                 Vector3 dist = (transform.position - target);
-                if (dist.magnitude < 4)
+                if (dist.magnitude < 8)
                 {
                     aiState = AIState.Target;
                 }
@@ -50,6 +58,12 @@ public class Enemy1 : MonoBehaviour
             case AIState.Target:
                 chase();
                 break;
+        }
+        if (isGrounded())
+        {
+            {
+                rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
+            }
         }
     }
 
@@ -80,9 +94,22 @@ public class Enemy1 : MonoBehaviour
         Vector3 target = player.GetComponent<Transform>().position;
         Vector3 dist = (transform.position - target);
         navy.SetDestination(target);
+        if ((transform.position - target).magnitude > 10)
+        {
+            aiState = AIState.Patrol;
+        }
         if ((transform.position - target).magnitude < 1)
         {
             aiState = AIState.Patrol;
         }
+    }
+
+    public bool isGrounded()
+    {
+        Vector3 begin = collider.bounds.center;
+        Vector3 end = new Vector3(collider.bounds.center.x, collider.bounds.min.y, collider.bounds.center.z);
+
+        //below uses the begin and end to check the area around player if it is touch the ground layer mask
+        return Physics.CheckCapsule(begin, end, collider.bounds.min.y * .5f, groundLayers);
     }
 }
