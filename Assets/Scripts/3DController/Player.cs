@@ -32,6 +32,8 @@ public class Player : MonoBehaviour {
 
     Controller3D controller;
     Vector2 directionalInput;
+    State state;
+    Animator anim;
 
     //state machine
     public enum State {
@@ -44,10 +46,14 @@ public class Player : MonoBehaviour {
     // Use this for initialization
     void Start() {
         controller = GetComponent<Controller3D>();
+        anim = GetComponent<Animator>();
+
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
         distToGround = GetComponent<CapsuleCollider>().bounds.extents.z;
+        
+        state = State.idle;
     }
 
     // Update is called once per frame
@@ -61,6 +67,7 @@ public class Player : MonoBehaviour {
         if (isGrounded) {
             velocity.y = 0;
             jumps = 0;
+            anim.SetBool("isJumping", false);
         }
 
         yaw += speedH * Input.GetAxis("Mouse X");
@@ -80,6 +87,17 @@ public class Player : MonoBehaviour {
         if (velocity.y > -50.0f) {
             velocity.y += gravity * Time.deltaTime;
         }
+
+        //animation flags
+        if((velocity.z > 0.01f) && IsGrounded()) {
+            state = State.walk;
+            anim.SetBool("isMoving", true);
+            Debug.Log("Moving");
+        } else {
+            state = State.idle;
+            anim.SetBool("isMoving", false);
+            Debug.Log("Not Moving");
+        }
     }
 
     public void SetDirectionalInput(Vector2 input) {
@@ -97,6 +115,8 @@ public class Player : MonoBehaviour {
         if (isGrounded || jumps < maxJumps) {
             velocity.y = maxJumpVelocity;
             jumps++;
+            state = State.jump;
+            anim.SetBool("isJumping", true);
         }
     }
 
@@ -104,13 +124,17 @@ public class Player : MonoBehaviour {
         //Check if velocity is decreasing (moving down)
         if (velocity.y < 0.0f) {
             velocity.y = 0;
+            state = State.glide;
+            anim.SetBool("isGliding", true);
         }
     }
 
     public void OnJumpInputUp() {
         if (velocity.y > minJumpVelocity) {
-            //velocity.y = minJumpVelocity;
+            velocity.y = minJumpVelocity;
         }
+
+        anim.SetBool("isGliding", false);
     }
 
     //========================

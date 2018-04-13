@@ -13,6 +13,7 @@ public class Enemy1 : MonoBehaviour
     public GameObject player;
     private Rigidbody rb;
     private CapsuleCollider collider;
+    float distToGround = 0;
     public float jump = 2f;
 
     public LayerMask groundLayers;
@@ -35,6 +36,8 @@ public class Enemy1 : MonoBehaviour
         currWaypoint = -2;
         setNextWaypoint();
         navy = GetComponent<UnityEngine.AI.NavMeshAgent>();
+
+        distToGround = GetComponent<CapsuleCollider>().bounds.extents.z;
     }
 
     // Update is called once per frame
@@ -59,10 +62,10 @@ public class Enemy1 : MonoBehaviour
                 chase();
                 break;
         }
-        if (isGrounded())
+        if (IsGrounded())
         {
             {
-                rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
+                
             }
         }
     }
@@ -104,12 +107,7 @@ public class Enemy1 : MonoBehaviour
         }
     }
 
-    public bool isGrounded()
-    {
-        Vector3 begin = collider.bounds.center;
-        Vector3 end = new Vector3(collider.bounds.center.x, collider.bounds.min.y, collider.bounds.center.z);
-
-        //below uses the begin and end to check the area around player if it is touch the ground layer mask
-        return Physics.CheckCapsule(begin, end, collider.bounds.min.y * .5f, groundLayers);
+    public bool IsGrounded() {
+        return Physics.Raycast(transform.position, -Vector3.up, distToGround + 1f);
     }
 }
