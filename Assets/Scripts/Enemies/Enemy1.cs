@@ -68,7 +68,6 @@ public class Enemy1 : MonoBehaviour
             if (IsGrounded())
             {
                 {
-                    rb.AddForce(transform.up * 10);
                 }
             }
         }
