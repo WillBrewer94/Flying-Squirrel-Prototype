@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerCollect : MonoBehaviour {
 
     public int collectCount;
     private AudioSource audio;
-
+    public Text gemText;
     // Use this for initialization
     void Start () {
         collectCount = 0;
@@ -23,5 +24,6 @@ public class PlayerCollect : MonoBehaviour {
     {
         collectCount++;
         audio.Play();
+        gemText.text = collectCount.ToString();
     }
 }

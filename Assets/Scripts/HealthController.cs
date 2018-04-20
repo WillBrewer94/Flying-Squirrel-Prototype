@@ -49,4 +49,11 @@ public class HealthController : MonoBehaviour {
         }
         health++;
     }
+    public void resetHealth()
+    {
+        hc2.texture = full;
+        hc1.texture = full;
+        hc0.texture = full;
+        health = 3;
+    }
 }
