@@ -18,6 +18,8 @@ public class Player : MonoBehaviour {
     public int maxJumps = 5;
     int jumps = 0;
 
+    public Camera camera;
+
     //Calculated values
     public Vector3 velocity;
     public Vector3 prevVelocity;
@@ -32,6 +34,7 @@ public class Player : MonoBehaviour {
 
     Controller3D controller;
     Vector2 directionalInput;
+    Vector2 camDirectionalInput;
     State state;
     Animator anim;
 
@@ -61,7 +64,9 @@ public class Player : MonoBehaviour {
         //cache previous velocity
         prevVelocity = velocity;
         CalculateVelocity();
-        controller.Move(velocity * Time.deltaTime, directionalInput);
+
+        //get camera look dir
+        controller.Move(velocity * Time.deltaTime, directionalInput, camDirectionalInput);
 
         isGrounded = IsGrounded();
         if (isGrounded) {
@@ -69,11 +74,6 @@ public class Player : MonoBehaviour {
             jumps = 0;
             anim.SetBool("isJumping", false);
         }
-
-        yaw += speedH * Input.GetAxis("Mouse X");
-        pitch -= speedV * Input.GetAxis("Mouse Y");
-
-        transform.eulerAngles = new Vector3(0.0f, yaw, 0.0f);
     }
 
     void CalculateVelocity() {
@@ -92,16 +92,17 @@ public class Player : MonoBehaviour {
         if((velocity.z > 0.01f) && IsGrounded()) {
             state = State.walk;
             anim.SetBool("isMoving", true);
-            Debug.Log("Moving");
         } else {
             state = State.idle;
             anim.SetBool("isMoving", false);
-            Debug.Log("Not Moving");
         }
     }
 
     public void SetDirectionalInput(Vector2 input) {
         directionalInput = input;
+    }
+    public void SetCamDirectionalInput(Vector2 input) {
+        camDirectionalInput = input;
     }
 
     public bool IsGrounded() {

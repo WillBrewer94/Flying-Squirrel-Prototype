@@ -21,7 +21,8 @@ public class PlayerInput : MonoBehaviour {
 
 	void Update () {
         player.SetDirectionalInput(playerActions.Move);
-
+        player.SetCamDirectionalInput(playerActions.CamMove);
+        Camera.main.GetComponent<CameraController>().SetCameraDirectionalInput(playerActions.CamMove);
         // Jump Input
         if (playerActions.Jump.WasPressed) {
             player.OnJumpInputDown();
@@ -46,8 +47,6 @@ public class PlayerInput : MonoBehaviour {
         playerActions.Jump.AddDefaultBinding(Key.Space);
         playerActions.Jump.AddDefaultBinding(InputControlType.Action1);
 
-        playerActions.Glide.AddDefaultBinding(Key.F);
-
         playerActions.Up.AddDefaultBinding(Key.W);
         playerActions.Down.AddDefaultBinding(Key.S);
         playerActions.Left.AddDefaultBinding(Key.A);
@@ -57,6 +56,16 @@ public class PlayerInput : MonoBehaviour {
         playerActions.Right.AddDefaultBinding(InputControlType.LeftStickRight);
         playerActions.Up.AddDefaultBinding(InputControlType.LeftStickUp);
         playerActions.Down.AddDefaultBinding(InputControlType.LeftStickDown);
+
+        playerActions.CamLeft.AddDefaultBinding(InputControlType.RightStickLeft);
+        playerActions.CamRight.AddDefaultBinding(InputControlType.RightStickRight);
+        playerActions.CamUp.AddDefaultBinding(InputControlType.RightStickUp);
+        playerActions.CamDown.AddDefaultBinding(InputControlType.RightStickDown);
+
+        playerActions.CamLeft.AddDefaultBinding(Mouse.NegativeX);
+        playerActions.CamRight.AddDefaultBinding(Mouse.PositiveX);
+        playerActions.CamUp.AddDefaultBinding(Mouse.PositiveY);
+        playerActions.CamDown.AddDefaultBinding(Mouse.NegativeY);
 
         playerActions.ListenOptions.IncludeUnknownControllers = true;
         playerActions.ListenOptions.MaxAllowedBindings = 4;
