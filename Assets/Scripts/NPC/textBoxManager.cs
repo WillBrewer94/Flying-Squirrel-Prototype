@@ -12,7 +12,8 @@ public class textBoxManager : MonoBehaviour {
 	public int endAtLine = 0;
 	public bool isTextActive;
 	//public ButtonManager theButton;
-	public TextAsset textFortunes;
+    public TextAsset introText;
+    public TextAsset hubText;
 	bool end = false;
 	public Text press;
 
@@ -52,7 +53,12 @@ public class textBoxManager : MonoBehaviour {
         }
     }
 	public void EnableTextBox() {
-		isTextActive = true;
+        if (this.name == "textHandler2")
+        {
+            textLines = (hubText.text.Split('\n'));
+        } 
+        endAtLine = textLines.Length - 1;
+        isTextActive = true;
 		textBox.SetActive(true);
         talking = true;
         currentLine = 0;
