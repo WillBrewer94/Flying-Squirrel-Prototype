@@ -15,6 +15,7 @@ public class Enemy1 : MonoBehaviour
     private CapsuleCollider collider;
     float distToGround = 0;
     public float jump = 2f;
+    public bool active = true;
 
     public LayerMask groundLayers;
 
@@ -42,30 +43,33 @@ public class Enemy1 : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
-        //State Machine
-        switch (aiState)
+    {
+        if (active == true)
         {
-            case AIState.Patrol:
-                if (navy.remainingDistance < 1)
-                {
-                    setNextWaypoint();
-                }
-                Vector3 target = player.GetComponent<Transform>().position;
-                Vector3 dist = (transform.position - target);
-                if (dist.magnitude < 8)
-                {
-                    aiState = AIState.Target;
-                }
-                break;
-            case AIState.Target:
-                chase();
-                break;
-        }
-        if (IsGrounded())
-        {
+            //State Machine
+            switch (aiState)
             {
-                
+                case AIState.Patrol:
+                    if (navy.remainingDistance < 1)
+                    {
+                        setNextWaypoint();
+                    }
+                    Vector3 target = player.GetComponent<Transform>().position;
+                    Vector3 dist = (transform.position - target);
+                    if (dist.magnitude < 8)
+                    {
+                        aiState = AIState.Target;
+                    }
+                    break;
+                case AIState.Target:
+                    chase();
+                    break;
+            }
+            if (IsGrounded())
+            {
+                {
+
+                }
             }
         }
     }
@@ -110,4 +114,6 @@ public class Enemy1 : MonoBehaviour
     public bool IsGrounded() {
         return Physics.Raycast(transform.position, -Vector3.up, distToGround + 1f);
     }
+
+    
 }

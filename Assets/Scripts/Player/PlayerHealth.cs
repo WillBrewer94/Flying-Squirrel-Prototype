@@ -27,13 +27,16 @@ public class PlayerHealth : MonoBehaviour {
         Debug.Log("enter");
         if (other.tag == "Enemy")
         {
-            Debug.Log("enemy");
-            if (Time.time > lastHit + 2)
+            if (other.gameObject.GetComponent<Enemy1>().active == true)
             {
-                Debug.Log("health");
-                healthController.lowerHealth();
-                health--;
-                lastHit = Time.time;
+                Debug.Log("enemy");
+                if (Time.time > lastHit + 2)
+                {
+                    Debug.Log("health");
+                    healthController.lowerHealth();
+                    health--;
+                    lastHit = Time.time;
+                }
             }
         } else if (other.tag == "DeathBox")
         {
