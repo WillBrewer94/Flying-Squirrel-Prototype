@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour {
 
+    ParticleSystem particles;
+
 	// Use this for initialization
 	void Start () {
-		
+        particles = gameObject.GetComponent<ParticleSystem>();
 	}
 	
 	// Update is called once per frame
@@ -19,9 +21,16 @@ public class EnemyHealth : MonoBehaviour {
         Debug.Log("hit");
         if (other.tag == "Player")
         {
+            //transform.eulerAngles = new Vector3(0, 0, 90);
+            transform.Rotate(Time.deltaTime, 0, 0);
+            
             if (other.gameObject.transform.position.y > transform.position.y)
             {
-                gameObject.GetComponent<Enemy1>().active = false;
+                if (gameObject.GetComponent<Enemy1>().active == true)
+                {
+                    gameObject.GetComponent<Enemy1>().active = false;
+                    particles.Play();
+                }
             }
         }
     }
