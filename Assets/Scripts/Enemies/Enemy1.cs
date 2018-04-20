@@ -56,7 +56,7 @@ public class Enemy1 : MonoBehaviour
                     }
                     Vector3 target = player.GetComponent<Transform>().position;
                     Vector3 dist = (transform.position - target);
-                    if (dist.magnitude < 8)
+                    if (dist.magnitude < 11)
                     {
                         aiState = AIState.Target;
                     }
@@ -68,7 +68,7 @@ public class Enemy1 : MonoBehaviour
             if (IsGrounded())
             {
                 {
-
+                    rb.AddForce(transform.up * 10);
                 }
             }
         }
@@ -101,7 +101,7 @@ public class Enemy1 : MonoBehaviour
         Vector3 target = player.GetComponent<Transform>().position;
         Vector3 dist = (transform.position - target);
         navy.SetDestination(target);
-        if ((transform.position - target).magnitude > 10)
+        if ((transform.position - target).magnitude > 15)
         {
             aiState = AIState.Patrol;
         }

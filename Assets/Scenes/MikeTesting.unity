@@ -100,13 +100,13 @@ NavMeshSettings:
     agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
-    agentSlope: 6
+    agentSlope: 19.6
     agentClimb: 0.4
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 1
-    cellSize: 2
+    cellSize: 0.15
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -736,7 +736,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1441554983
+  randomSeed: 797683157
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -4184,7 +4184,7 @@ RectTransform:
   - {fileID: 532085074}
   - {fileID: 1538746544}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4336,7 +4336,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: bcf471273cc460644bee464d85b13464, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: bcf471273cc460644bee464d85b13464, type: 3}
       propertyPath: m_IsActive
@@ -5560,6 +5560,16 @@ Prefab:
       propertyPath: m_UseGravity
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 195706564758429414, guid: ac5a87f88a63376428344d90b1ff4b4d,
+        type: 2}
+      propertyPath: m_BaseOffset
+      value: 0.355
+      objectReference: {fileID: 0}
+    - target: {fileID: 114282325954365846, guid: ac5a87f88a63376428344d90b1ff4b4d,
+        type: 2}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2112983160}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac5a87f88a63376428344d90b1ff4b4d, type: 2}
   m_IsPrefabParent: 0
@@ -7216,7 +7226,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4489284471370348, guid: 05ee473c722c26340a1106b6c4da9a82, type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 05ee473c722c26340a1106b6c4da9a82, type: 2}
