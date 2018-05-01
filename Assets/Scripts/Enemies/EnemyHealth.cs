@@ -5,16 +5,45 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour {
 
     ParticleSystem particles;
+    AudioSource audio2;
 
-	// Use this for initialization
-	void Start () {
+    public float spin = 2;
+    public float spinLimit = 20;
+    public float scale = 0.05f;
+
+    private bool hit = false;
+
+    // Use this for initialization
+    void Start () {
         particles = gameObject.GetComponent<ParticleSystem>();
-	}
+        audio2 = gameObject.GetComponent<AudioSource>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
+
+    void FixedUpdate()
+    {
+        if (hit)
+        {
+            transform.Rotate(0, spin++, 0);
+
+            transform.localScale -= new Vector3(scale, scale, scale);
+
+            if (spin >= spinLimit)
+            {
+                Destroy(this.gameObject);
+                GameObject player = GameObject.FindGameObjectWithTag("Player");
+                player.GetComponent<PlayerCollect>().collectObject();
+            }
+        }
+        else
+        {
+            transform.Rotate(0, spin, 0);
+        }
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -30,8 +59,12 @@ public class EnemyHealth : MonoBehaviour {
                 {
                     gameObject.GetComponent<Enemy1>().active = false;
                     particles.Play();
+                    other.GetComponent<Rigidbody>().AddForce(transform.up * 20);
+                    audio2.Play();
+                    hit = true;
                 }
             }
+            
         }
     }
 }
