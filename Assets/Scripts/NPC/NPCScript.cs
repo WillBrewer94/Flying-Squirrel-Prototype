@@ -10,6 +10,7 @@ public class NPCScript : MonoBehaviour {
 	void Start () {
         bc = GetComponent<BoxCollider>();
         text = GetComponentInChildren<textBoxManager>();
+        text.enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -25,6 +26,7 @@ public class NPCScript : MonoBehaviour {
     {
         canvas.enabled = true;
         Debug.Log("enter");
+        text.enabled = true;
     }
 
     void OnTriggerExit(Collider other)
@@ -32,6 +34,7 @@ public class NPCScript : MonoBehaviour {
         canvas.enabled = false;
         text.DisableTextBox();
         Debug.Log("exit");
+        text.enabled = false;
     }
     void OnTriggerStay(Collider other)
     {
