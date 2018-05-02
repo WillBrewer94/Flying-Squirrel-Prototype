@@ -205,8 +205,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1260009636537172}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 150.01224, y: 49.75, z: 14.432696}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 17.759766, y: -0.27676773, z: -138.58517}
   m_LocalScale: {x: 2.6751742, y: 2.6751742, z: 2.6751742}
   m_Children:
   - {fileID: 4650849091175086}
@@ -336,8 +336,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.7294254, y: 0.59313893, z: 0.746355}
-  m_Center: {x: 0.0033509666, y: 1.0650747, z: 0.7846813}
+  m_Size: {x: 1.0395494, y: 0.9688358, z: 1.0827733}
+  m_Center: {x: 0.15841295, y: 1.2529231, z: 0.9528905}
 --- !u!82 &82995198527525772
 AudioSource:
   m_ObjectHideFlags: 1
@@ -461,6 +461,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypoints:
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   currWaypoint: 0
@@ -619,7 +621,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 96760307
+  randomSeed: -953092877
   InitialModule:
     serializedVersion: 3
     enabled: 1
