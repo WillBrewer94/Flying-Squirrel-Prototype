@@ -33,23 +33,23 @@ public class textBoxManager : MonoBehaviour {
         //Debug.Log(currentLine);
         if (talking)
         {
-            if ((Input.GetKeyDown("e")))
-            {
-                currentLine++;
-            }
+            //if ((Input.GetKeyDown("e")))
+            //{
+                //currentLine++;
+            //}
             if (currentLine > endAtLine)
             {
                 DisableTextBox();
                 
             }
             theText.text = textLines[currentLine];
-        } else
-        {
-            if ((Input.GetKeyDown("e")))
-            {
-                EnableTextBox();
-            }
-        }
+        }// else
+       // {
+            //if ((Input.GetKeyDown("e")))
+            //{
+                //EnableTextBox();
+            //}
+        //}
     }
 	public void EnableTextBox() {
 		isTextActive = true;
@@ -72,4 +72,18 @@ public class textBoxManager : MonoBehaviour {
 			endAtLine = textLines.Length - 1;
 		}
 	}
+    public void advanceScript()
+    {
+        if (talking)
+        {
+            currentLine++;
+        }
+        else
+        {
+            if ((Input.GetKeyDown("e")))
+            {
+                EnableTextBox();
+            }
+        }
+    }
 }

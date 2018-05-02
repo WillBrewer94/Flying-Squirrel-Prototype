@@ -5,7 +5,7 @@ using UnityEngine;
 public class CloudManager : MonoBehaviour {
     public GameObject cloud;
     public PlayerCollect count;
-    int goal = 1;
+    int goal = 15;
 	// Use this for initialization
 	void Start () {
         cloud.SetActive(false);
