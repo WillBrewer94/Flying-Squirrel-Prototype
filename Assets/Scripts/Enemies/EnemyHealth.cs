@@ -39,10 +39,6 @@ public class EnemyHealth : MonoBehaviour {
                 player.GetComponent<PlayerCollect>().collectObject();
             }
         }
-        else
-        {
-            transform.Rotate(0, spin, 0);
-        }
     }
 
     void OnTriggerEnter(Collider other)
