@@ -7,6 +7,8 @@ public class PlayerHealth : MonoBehaviour {
     public HealthController healthController;
     public float lastHit;
     public GameObject respawn;
+    public GameObject respawn2;
+    public PlayerCollect count;
 	// Use this for initialization
 	void Start () {
 		
@@ -16,7 +18,7 @@ public class PlayerHealth : MonoBehaviour {
 	void Update () {
 		if (health == 0)
         {
-            this.transform.parent.position = respawn.transform.position;
+            goToRespawn();
             health = 3;
             healthController.resetHealth();
         }
@@ -43,6 +45,18 @@ public class PlayerHealth : MonoBehaviour {
             healthController.lowerHealth();
             health--;
             lastHit = Time.time;
+            goToRespawn();
+        }
+    }
+
+    void goToRespawn()
+    {
+        if (count.collectCount >= 4)
+        {
+            this.transform.parent.position = respawn2.transform.position;
+        }
+        else
+        {
             this.transform.parent.position = respawn.transform.position;
         }
     }
