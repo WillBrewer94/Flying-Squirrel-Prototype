@@ -85,7 +85,7 @@ public class Player : MonoBehaviour {
         velocity.z = Mathf.SmoothDamp(velocity.z, targetVelocityZ, ref velocityZSmoothing, (isGrounded) ? accelerationTimeGrounded : accelerationTimeAirborne);
 
         //Ensure velocity doesn't get crazy high
-        if (velocity.y > -50.0f) {
+        if (velocity.y > -50.0f && !isGrounded) {
             velocity.y += gravity * Time.deltaTime;
         }
 
