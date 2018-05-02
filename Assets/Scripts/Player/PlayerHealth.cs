@@ -42,6 +42,7 @@ public class PlayerHealth : MonoBehaviour {
             }
         } else if (other.tag == "DeathBox")
         {
+            Debug.Log("falls");
             healthController.lowerHealth();
             health--;
             lastHit = Time.time;
