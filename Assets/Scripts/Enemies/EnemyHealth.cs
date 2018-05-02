@@ -35,8 +35,6 @@ public class EnemyHealth : MonoBehaviour {
             if (spin >= spinLimit)
             {
                 Destroy(this.gameObject);
-                GameObject player = GameObject.FindGameObjectWithTag("Player");
-                player.GetComponent<PlayerCollect>().collectObject();
             }
         }
     }
