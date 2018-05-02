@@ -80,10 +80,7 @@ public class textBoxManager : MonoBehaviour {
         }
         else
         {
-            if ((Input.GetKeyDown("e")))
-            {
-                EnableTextBox();
-            }
+            EnableTextBox();
         }
     }
 }
