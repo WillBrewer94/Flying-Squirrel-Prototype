@@ -23,6 +23,7 @@ public class PlayerInput : MonoBehaviour {
         player.SetDirectionalInput(playerActions.Move);
         player.SetCamDirectionalInput(playerActions.CamMove);
         Camera.main.GetComponent<CameraController>().SetCameraDirectionalInput(playerActions.CamMove);
+
         // Jump Input
         if (playerActions.Jump.WasPressed) {
             player.OnJumpInputDown();
@@ -34,6 +35,10 @@ public class PlayerInput : MonoBehaviour {
         
         if (playerActions.Jump.WasReleased) {
             player.OnJumpInputUp();
+        }
+
+        if (playerActions.Dialogue.WasPressed) {
+            player.OnDialogueInputDown();
         }
     }
 
@@ -51,6 +56,9 @@ public class PlayerInput : MonoBehaviour {
         playerActions.Down.AddDefaultBinding(Key.S);
         playerActions.Left.AddDefaultBinding(Key.A);
         playerActions.Right.AddDefaultBinding(Key.D);
+
+        playerActions.Dialogue.AddDefaultBinding(Key.E);
+        playerActions.Dialogue.AddDefaultBinding(InputControlType.Action2);
 
         playerActions.Left.AddDefaultBinding(InputControlType.LeftStickLeft);
         playerActions.Right.AddDefaultBinding(InputControlType.LeftStickRight);

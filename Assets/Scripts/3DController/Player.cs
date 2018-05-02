@@ -19,6 +19,7 @@ public class Player : MonoBehaviour {
     int jumps = 0;
 
     public Camera camera;
+    public textBoxManager text; 
 
     //Calculated values
     public Vector3 velocity;
@@ -136,6 +137,20 @@ public class Player : MonoBehaviour {
         }
 
         anim.SetBool("isGliding", false);
+    }
+
+    public void OnDialogueInputDown() {
+        if(text != null) {
+            text.advanceScript();
+        }
+    }
+
+    void OnTriggerEnter(Collider other) {
+        text = other.GetComponentInChildren<textBoxManager>();
+    }
+
+    void OnTriggerExit(Collider other) {
+        text = null;
     }
 
     //========================
